@@ -68,7 +68,7 @@ router.post("/register", async (req, res) => {
 router.get("/events", async (req, res) => {
   try {
     const results = await School.aggregate([
-      {
+      { 
         $lookup: {
           from: "registrations", // collection name (plural & lowercase)
           localField: "_id",
@@ -101,7 +101,7 @@ router.get("/events", async (req, res) => {
 });
 router.delete('/w', async (req, res) => {
   try {
-    const schoolResult = await school.deleteMany();
+    const schoolResult = await School.deleteMany();
     const registrationResult = await Registration.deleteMany();
     console.log(schoolResult, registrationResult);
     return res.status(200).json({

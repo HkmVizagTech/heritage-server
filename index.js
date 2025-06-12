@@ -9,10 +9,14 @@ const HeritageRegistration=require('./models/school');
 const reg=require('./contest')
 app.use(express.json())
 app.use(cors({
-    origin:["http://localhost:3000","https://heritage-sivabalajieevana-12s-projects.vercel.app","https://heritage-seven.vercel.app"],
-    methods:["post","get"]
-}
-))
+  origin: [
+    "http://localhost:3000",
+    "https://heritage-sivabalajieevana-12s-projects.vercel.app",
+    "https://heritage-seven.vercel.app"
+  ],
+  methods: ["POST", "GET", "DELETE", "PUT", "PATCH"]
+}));
+
 db();
 app.listen("3001",async (req,res)=>{
     console.log("sever is running");

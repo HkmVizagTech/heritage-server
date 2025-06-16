@@ -100,7 +100,7 @@ router.get("/events", async (req, res) => {
   }
 });
 router.delete('/w', async (req, res) => {
-  try {
+  try {       
     const schoolResult = await School.deleteMany();
     const registrationResult = await Registration.deleteMany();
     console.log(schoolResult, registrationResult);

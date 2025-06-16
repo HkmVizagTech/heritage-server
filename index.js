@@ -12,7 +12,10 @@ app.use(cors({
   origin: [
     "http://localhost:3000",
     "https://heritage-sivabalajieevana-12s-projects.vercel.app",
-    "https://heritage-seven.vercel.app"
+    "https://heritage-seven.vercel.app",
+    "https://heritage-form-git-main-hkmvizags-projects.vercel.app",
+    "https://heritage-form-hkmvizags-projects.vercel.app",
+    "https://heritage-form.vercel.app"
   ],
   methods: ["POST", "GET", "DELETE", "PUT", "PATCH"]
 }));

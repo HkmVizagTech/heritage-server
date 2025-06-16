@@ -51,24 +51,24 @@ app.post("/school", async (req, res) => {
 
     // Save to database
     await newEntry.save()
-            const messageResponse = await gupshup.sendingTextTemplate({
-                template: {
-                    id: '6cc5bf4e-8914-4d40-bb5f-e3d46d2d66c8',
-                    params: [school, "Heritage Fest Registration Form"]
-                },
-                'src.name': 'Production',
-                destination: phonea,
-                source: '917075176108',
-            }, {
-                apikey: 'zbut4tsg1ouor2jks4umy1d92salxm38'
-            }).then((data)=>{
-              console.log(data)
-            })
-            .catch((err)=>{
-              console.error(err)
-            });
+            // const messageResponse = await gupshup.sendingTextTemplate({
+            //     template: {
+            //         id: '6cc5bf4e-8914-4d40-bb5f-e3d46d2d66c8',
+            //         params: [school, "Heritage Fest Registration Form"]
+            //     },
+            //     'src.name': 'Production',
+            //     destination: phonea,
+            //     source: '917075176108',
+            // }, {
+            //     apikey: 'zbut4tsg1ouor2jks4umy1d92salxm38'
+            // }).then((data)=>{
+            //   console.log(data)
+            // })
+            // .catch((err)=>{
+            //   console.error(err)
+            // });
     
-            console.log("WhatsApp message sent successfully:", messageResponse);
+            // console.log("WhatsApp message sent successfully:", messageResponse);
 
     res.status(201).json({ message: "Registration successful", data: newEntry })
   } catch (error) {

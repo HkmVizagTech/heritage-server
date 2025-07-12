@@ -4,11 +4,10 @@ const School = require("./models/school");
 // const school = require("./models/school");
 
 const router = express.Router();
-
 router.post("/register", async (req, res) => {
   try {
     const { schoolId, schoolName, contests, totalParticipants } = req.body;
-    console.log(schoolId, schoolName, contests, totalParticipants)
+    console.log(schoolId, schoolName, contests, totalParticipants);
 
     // Validate required fields
     if (
@@ -20,7 +19,7 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "Invalid registration data." });
     }
 
-    // Optional: Validate school exists
+    // Check if school exists
     const school = await School.findById(schoolId);
     if (!school) {
       return res.status(404).json({ message: "School not found." });
@@ -41,24 +40,28 @@ router.post("/register", async (req, res) => {
         .json({ message: "No valid contests with participants provided." });
     }
 
-    // Save registration
-    const registration = new Registration({
-      schoolId,
-      schoolName: schoolName || school.name, // fallback to DB value
-      contests: validContests,
-      totalParticipants,
+    // Upsert (update if exists, insert if not)
+    const updatedRegistration = await Registration.findOneAndUpdate(
+      { schoolId }, // Match by schoolId
+      {
+        schoolId,
+        schoolName: schoolName || school.name,
+        contests: validContests,
+        totalParticipants,
+      },
+      { new: true, upsert: true } // Create if not found, return the updated doc
+    );
+
+    res.status(201).json({
+      message: "Registration successful (overwritten if existed)",
+      registration: updatedRegistration,
     });
-
-    await registration.save();
-
-    res
-      .status(201)
-      .json({ message: "Registration successful", registration });
   } catch (error) {
     console.error("Error saving registration:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 // const express = require("express");
 // const router = express.Router();
 
